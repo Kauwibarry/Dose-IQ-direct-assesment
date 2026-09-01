@@ -2,6 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<script>
+(function(){
+  var LANGS=["en","de","fr","it","es","pt","nl","pl","cs"];
+  var path=location.pathname.replace(/\/+$/,"")||"/";
+  var seg=(path.split("/").filter(Boolean)[0]||"").toLowerCase();
+  if(LANGS.indexOf(seg)!==-1) return;
+  if(path!=="/" && path!=="/index.html") return;
+  var saved=null; try{saved=localStorage.getItem("bonq_lang")}catch(e){}
+  var nav=(navigator.language||navigator.userLanguage||"en").slice(0,2).toLowerCase();
+  var lang=(saved&&LANGS.indexOf(saved)!==-1)?saved:(LANGS.indexOf(nav)!==-1?nav:"en");
+  location.replace("/"+lang+location.search+location.hash);
+})();
+</script>
+<link rel="alternate" hreflang="en" href="https://www.dose-iq.com/en" />
+<link rel="alternate" hreflang="de" href="https://www.dose-iq.com/de" />
+<link rel="alternate" hreflang="fr" href="https://www.dose-iq.com/fr" />
+<link rel="alternate" hreflang="it" href="https://www.dose-iq.com/it" />
+<link rel="alternate" hreflang="es" href="https://www.dose-iq.com/es" />
+<link rel="alternate" hreflang="pt" href="https://www.dose-iq.com/pt" />
+<link rel="alternate" hreflang="nl" href="https://www.dose-iq.com/nl" />
+<link rel="alternate" hreflang="pl" href="https://www.dose-iq.com/pl" />
+<link rel="alternate" hreflang="cs" href="https://www.dose-iq.com/cs" />
+<link rel="alternate" hreflang="x-default" href="https://www.dose-iq.com/en" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dose-IQ — Personalised supplementation | Official Bioniq distributor</title>
 <meta name="description" content="Personalised Swiss granules matched to your body. Take the free Wellness Assessment and get a formula made for you." />
@@ -813,16 +836,26 @@ document.addEventListener('click', (e) => {
   }
 });
 
-function setLang(lang) {
+const LANG_PATHS = ['en','de','fr','it','es','pt','nl','pl','cs'];
+function pathLang() {
+  const first = (location.pathname.split('/').filter(Boolean)[0] || '').toLowerCase();
+  return LANG_PATHS.includes(first) ? first : null;
+}
+function setLang(lang, opts) {
   if (!T[lang]) lang = 'en';
   localStorage.setItem('bonq_lang', lang);
   document.documentElement.lang = lang;
-  document.getElementById('langBtn').textContent = LANG_LABELS[lang] + ' ▾';
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = LANG_LABELS[lang] + ' ▾';
   document.querySelectorAll('#langMenu button').forEach(b => {
     b.classList.toggle('active', b.getAttribute('data-lang') === lang);
   });
   document.getElementById('langMenu')?.classList.remove('open');
   applyLang(lang);
+  if (opts && opts.skipUrl) return;
+  const want = '/' + lang;
+  const cur = location.pathname.replace(/\/+$/, '') || '/';
+  if (cur !== want) history.pushState({ lang }, '', want + location.search);
 }
 
 function applyLang(lang) {
@@ -859,13 +892,19 @@ function applyLang(lang) {
   });
 }
 
-// auto-detect / restore
+// path wins; else saved choice; else browser language
 (function(){
+  const fromPath = pathLang();
+  if (fromPath) { setLang(fromPath, { skipUrl: true }); return; }
   const saved = localStorage.getItem('bonq_lang');
-  const browser = (navigator.language || 'en').slice(0,2);
-  const initial = saved || (T[browser] ? browser : 'en');
+  const browser = (navigator.language || 'en').slice(0,2).toLowerCase();
+  const initial = (saved && T[saved]) ? saved : (T[browser] ? browser : 'en');
   if (document.getElementById('langBtn')) setLang(initial);
 })();
+window.addEventListener('popstate', () => {
+  const lang = pathLang() || localStorage.getItem('bonq_lang') || 'en';
+  setLang(lang, { skipUrl: true });
+});
 
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeCountryModal()})
 </script></body></html>
