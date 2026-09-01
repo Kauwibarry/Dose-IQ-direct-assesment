@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/:lang(en|de|fr|it|es|pt|nl|pl|cs)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:lang(en|de|fr|it|es|pt|nl|pl|cs)/",
+      "destination": "/index.html"
+    }
+  ]
+}
