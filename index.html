@@ -509,6 +509,7 @@ footer a.footer-contact-btn{text-decoration:none;color:var(--muted)}
 <option value="US">United States</option>
 <option value="PL">Poland</option>
 <option value="PT">Portugal</option>
+<option value="ES">Spain</option>
 <option value="CZ">Czech Republic</option>
 <option value="OTHER"><span data-i18n="modal_other">My country is not listed</span></option>
 </select>
@@ -527,7 +528,7 @@ footer a.footer-contact-btn{text-decoration:none;color:var(--muted)}
 <div class="waitlist-msg" id="waitlistMsg" data-i18n="wait_thanks">Thank you &mdash; you are on the list.</div>
 </div></div></div>
 <script>
-const COUNTRY_URLS={GB:"https://shopbioniq.com/en-GB/Dose-IQ-GB",NL:"https://shopbioniq.com/nl-NL/Dose-IQ-NL",DE:"https://shopbioniq.com/de-DE/Dose-IQ-DE",US:"https://shopbioniq.com/en-US/Dose-IQ-US",PL:"https://shopbioniq.com/pl-PL/Dose-IQ-PL",PT:"https://shopbioniq.com/pt-PT/Dose-IQ-PT",CZ:"https://shopbioniq.com/cs-CZ/Dose-IQ-CZ",AT:"https://shopbioniq.com/de-AT/Dose-IQ-AT"};
+const COUNTRY_URLS={GB:"https://shopbioniq.com/en-GB/Dose-IQ-GB",NL:"https://shopbioniq.com/nl-NL/Dose-IQ-NL",DE:"https://shopbioniq.com/de-DE/Dose-IQ-DE",US:"https://shopbioniq.com/en-US/Dose-IQ-US",PL:"https://shopbioniq.com/pl-PL/Dose-IQ-PL",PT:"https://shopbioniq.com/pt-PT/Dose-IQ-PT",ES:"https://shopbioniq.com/es-es/Dose-IQ-SP",CZ:"https://shopbioniq.com/cs-CZ/Dose-IQ-CZ",AT:"https://shopbioniq.com/de-AT/Dose-IQ-AT"};
 function openCountryModal(){document.getElementById("countryModal").classList.add("open");document.body.style.overflow="hidden"}
 function closeCountryModal(){document.getElementById("countryModal").classList.remove("open");document.body.style.overflow=""}
 function overlayClick(e){if(e.target.id==="countryModal")closeCountryModal()}
