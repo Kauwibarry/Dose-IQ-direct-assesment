@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/:lang(en|de|fr|it|es|pt|nl|pl|cs)/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/:lang(en|de|fr|it|es|pt|nl|pl|cs)/contact.html",
+      "destination": "/contact.html"
+    },
+    {
       "source": "/:lang(en|de|fr|it|es|pt|nl|pl|cs)",
       "destination": "/index.html"
     },
