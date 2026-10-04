@@ -48,6 +48,8 @@ header{background:rgba(247,245,242,.92);backdrop-filter:blur(12px);position:stic
 .btn-orange:hover{background:var(--orange-hover);transform:translateY(-1px)}
 .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text);border-radius:999px;padding:11px 20px;font-weight:600;font-size:.95rem;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center}
 .btn-outline:hover{border-color:#CBD5E1;background:#fff}
+.shop-secondary{display:inline-block;color:var(--muted);font-size:.86rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:8px 4px}
+.shop-secondary:hover{color:var(--text)}
 .hero{margin:0 auto;padding:48px 24px 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center}
 .hero h1{font-size:clamp(2.1rem,4.2vw,3.25rem);line-height:1.12;font-weight:800;letter-spacing:-.03em;margin-bottom:16px}
 .hero h1 .accent{color:var(--blue)}
@@ -387,7 +389,7 @@ footer p+p{margin-top:8px}
 <p class="hero-lead"><span data-i18n="hero_lead">Most supplements are one-size-fits-all. Answer a few questions to see a personalised Bioniq GO formula matched to your lifestyle. Educational only — not a diagnosis or medical advice.</span></p>
 <div class="trust-row"><span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <strong>4.5</strong> &middot; <span data-i18n="trust_reviews">12,400+ Bioniq product reviews</span></span><span><span data-i18n="patented">Patented Swiss granule technology</span></span></div>
 <p class="sold-line-hero" data-i18n="sold_line">Bioniq GO is only sold through independent distributors.</p>
-<div class="hero-ctas"><button class="btn-orange" data-i18n="cta_quiz" onclick="openCountryModal()">Start the quiz &rarr;</button><a href="#how" class="btn-outline" data-i18n="learn_more">Learn more</a></div>
+<div class="hero-ctas"><button class="btn-orange" data-i18n="cta_quiz" onclick="openCountryModal()">Start the quiz &rarr;</button><a href="#how" class="btn-outline" data-i18n="learn_more">Learn more</a><a class="shop-secondary" href="https://shopbioniq.com/en-GB/Dose-IQ-GB">See Bioniq GO on the shop</a></div>
 <p class="hero-note"><span data-i18n="hero_note">Free · No card required · See your Bioniq GO formula before you buy</span></p>
 </div><div class="hero-visual">
 <video autoplay muted loop playsinline poster="hero-video-poster.jpg" aria-label="bioniq GO personalised daily supplement">
@@ -731,6 +733,7 @@ Svetulka 3, 1415 Sofia, Bulgaria
 </div>
 <p id="hopNote" class="hop-note" data-i18n="hop_note" style="font-size:.86rem;color:var(--muted);line-height:1.45;margin:0 0 12px">You continue on the official Bioniq shop. They may ask for your email again to start the Wellness Assessment — that is normal.</p>
 <button class="btn-orange" id="continueBtn" data-i18n="modal_continue" onclick="continueToAssessment()" disabled style="opacity:.5;cursor:not-allowed">Continue to Wellness Assessment &rarr;</button>
+<a class="shop-secondary" href="https://shopbioniq.com/en-GB/Dose-IQ-GB">See Bioniq GO on the shop</a>
 <div class="waitlist-box" id="waitlistBox">
 <p style="font-size:.9rem;color:var(--muted);margin-bottom:10px" data-i18n="wait_text">We are not available in your country yet. Join the waiting list and we will notify you when we launch.</p>
 <label for="waitlistCountry"><span data-i18n="wait_country">Your country</span></label>
