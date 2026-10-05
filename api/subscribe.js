@@ -307,21 +307,39 @@ export default async function handler(req, res) {
     let gr = await postContact(fields, tags);
     let text = "";
 
+    async function readErr(resp) {
+      try { return await resp.text(); } catch (_) { return ""; }
+    }
+
     if (gr.status === 400) {
-      try { text = await gr.text(); } catch (_) {}
+      text = await readErr(gr);
       if (!/already|exists|duplicate/i.test(text)) {
-        fields = withoutFieldIds(fields, [GR_FT.url, GR_FT.http_referer]);
-        gr = await postContact(fields, tags);
-        if (gr.status === 400) {
-          try { text = await gr.text(); } catch (_) {}
-          if (!/already|exists|duplicate/i.test(text)) {
-            fields = withoutFieldIds(fields, [GR_FT.ref, GR_FT.url, GR_FT.http_referer]);
-            tags = [];
-            gr = await postContact(fields, tags);
-            try { text = await gr.text(); } catch (_) { text = ""; }
+        if (tags.length) {
+          tags = [];
+          gr = await postContact(fields, tags);
+          if (gr.status === 400) {
+            text = await readErr(gr);
+          } else {
+            text = "";
           }
-        } else {
-          text = "";
+        }
+        if (gr.status === 400 && text && !/already|exists|duplicate/i.test(text)) {
+          fields = withoutFieldIds(fields, [GR_FT.url, GR_FT.http_referer]);
+          gr = await postContact(fields, tags);
+          if (gr.status === 400) {
+            text = await readErr(gr);
+          } else {
+            text = "";
+          }
+        }
+        if (gr.status === 400 && text && !/already|exists|duplicate/i.test(text)) {
+          fields = withoutFieldIds(fields, [GR_FT.ref, GR_FT.url, GR_FT.http_referer]);
+          gr = await postContact(fields, []);
+          if (gr.status === 400) {
+            text = await readErr(gr);
+          } else {
+            text = "";
+          }
         }
       }
     }
