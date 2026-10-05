@@ -810,7 +810,7 @@ function continueToAssessment(){
   fetch("/api/subscribe",{
     method:"POST",
     headers:{"Content-Type":"application/json","Accept":"application/json"},
-    body:JSON.stringify({email:email,privacy_consent:"yes",country:val,lang:lang,ads_consent:adsConsent,event_id:eventId,event_source_url:location.href})
+    body:JSON.stringify((function(){var ft=(window.doseIqFirstTouchPayload&&window.doseIqFirstTouchPayload())||{};return Object.assign({email:email,privacy_consent:"yes",country:val,lang:lang,ads_consent:adsConsent,event_id:eventId,event_source_url:location.href},ft);})())
   }).then(function(r){
     return r.json().catch(function(){return {ok:false}}).then(function(data){
       if(r.ok && data && data.ok){
